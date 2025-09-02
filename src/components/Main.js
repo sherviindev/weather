@@ -106,10 +106,11 @@ const Main = () => {
       />
 
       <p onClick={() => setLang(!lang)} className='translater'>
-        {lang ? 'فارسی ؟' : 'Eng ?'}
+        {lang ? 'فارسی ' : 'Eng '}
       </p>
     </div>
   );
 };
 
 export default Main;
+
