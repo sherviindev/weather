@@ -5,7 +5,7 @@ import linkIcon from './external-link.svg';
 
 const Main = () => {
   const inputValue = useRef();
-  const [cityName, setCityName] = useState(""); 
+  const [cityName, setCityName] = useState("Tehran"); 
   const [error, setError] = useState(true);
   const [lang, setLang] = useState(true);
   const [myData, setMyData] = useState([]);
@@ -15,23 +15,20 @@ const Main = () => {
 
   const APP_KEY = "8c413e7dc43650da400e75bc77c10407";
 
-  // گرفتن شهر با IP
+  
   useEffect(() => {
-    if (!cityName) { // فقط اگر cityName خالی باشد
-      fetch('http://ip-api.com/json')
-        .then(res => res.json())
-        .then(data => {
-          if (data.status === 'success' && data.city) {
-            setCityName(data.city);
-          } else {
-            setCityName(""); // هیچ fallback
-          }
-        })
-        .catch(() => setCityName("")); // هیچ fallback
-    }
-  }, [cityName]);
+    fetch('http://ip-api.com/json')
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 'success' && data.city) {
+          setCityName(data.city);
+        }
+      })
+      .catch(() => {
+        
+      });
+  }, []);
 
-  // گرفتن اطلاعات آب‌وهوا وقتی cityName یا lang تغییر کند
   useEffect(() => {
     if (!cityName) return;
     (async () => {
@@ -106,11 +103,10 @@ const Main = () => {
       />
 
       <p onClick={() => setLang(!lang)} className='translater'>
-        {lang ? 'فارسی ' : 'Eng '}
+        {lang ? 'فارسی ؟' : 'Eng ?'}
       </p>
     </div>
   );
 };
 
 export default Main;
-
